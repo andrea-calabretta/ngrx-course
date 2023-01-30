@@ -19,6 +19,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthGuard } from './auth/auth.guard';
+import { routerReducer, RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 const routes: Routes = [
@@ -51,11 +52,18 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     AuthModule.forRoot(),
-    StoreModule.forRoot( {}),
+    StoreModule.forRoot( {
+      router: routerReducer,
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal
+    })
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+

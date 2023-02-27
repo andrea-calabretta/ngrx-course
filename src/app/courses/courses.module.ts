@@ -53,6 +53,9 @@ const EntityMetadata: EntityMetadataMap = {
     entityDispatcherOptions : {
       optimisticUpdate: true
     }
+  },
+  Lesson: {
+    sortComparer: compareLessons
   }
 };
 
